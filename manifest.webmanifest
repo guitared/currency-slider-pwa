@@ -1,28 +1,15 @@
 {
-  // Name of the app and short name in case there isn't enough space
   "name": "Currency Slider",
   "short_name": "$ Slider",
-  // Description what your app is
   "description": "Github Page as a Progressive Web App",
- 
-  // Scope and start URL - these need to change to yours
   "scope": "/currency-slider-pwa/",
   "start_url": "/currency-slider-pwa/",
- 
-  // colours of the app as displayed in the installer
   "background_color": "#000000",
   "theme_color": "#000000",
- 
-  // Display of the app. 
-  //This could be "standalone", "fullscreen", "minimal-ui" or "browser"
   "display": "fullscreen", 
- 
-  // The possible icons to display. Make sure to change the src URL,
-  // the type and the size to your needs. If the size isn't correct, 
-  // you may not be able to install the app. 
   "icons": [
       {
-        "src": "/currency-slider-pwa/img/icon.png",
+        "src": "/currency-slider-pwa/icon.png",
         "type": "image/png",
         "sizes": "700x700"
       }
