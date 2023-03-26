@@ -1,22 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <title>Currency Slider</title>
-  <link rel="canonical" href="https://guitared.github.io/currency-slider-pwa/" />
-  <link rel="manifest" href="/currency-slider-pwa/manifest.webmanifest">
 </head>
 <body>
-  <h1>Currency Slider</h1>
+  <div class="fix-wrapper">
+    <div id="progress"></div>
+    <div class="flex">
+      <div id="cur1" class="currency" onclick="setstep(1)">KRW</div>
+      <div id="cur2" class="currency" onclick="setstep(2)">THB</div>
+    </div>
+    <div class="flex">
+      <input id="krw" type="number" value="0" step="1000" />
+      <input id="thb" type="number" value="0" step="100" />
+    </div>
+  </div>
   
-  <script>
-      if (navigator.serviceWorker) {
-        navigator.serviceWorker.register (
-          '/currency-slider-pwa/sw.js',
-          {scope: '/currency-slider-pwa/'}
-        )
-      }
-  </script>
-</body>
-</html>
+  <div id="slider" style="height:10000px"></div>
+
+<script>
+const exchange = 0.026
+function up(){}
+function down(){
+}
+function setstep(i){
+  cur1.classList.remove("bold")
+  cur2.classList.remove("bold")
+  e.classList.add("bold")
+}
+function update(){
+  if(document.body.scrollTop > 5000){
+    up()
+  }
+  window.scroll(0, 5000)
+}
+document.addEventListener("scroll", update)
+
+window.onload = _=>setTimeout(_=>window.scroll(0, 5000),100)
+
+</script>
+
+<style>
+
+  * {
+    box-sizing: border-box;
+    /**/outline: 1px dashed rgba(255,0,0,0.1);/**/
+  }
+  html, body {
+    background: black;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: white;
+  }
+  .fix-wrapper {
+    position: fixed;
+    top: 0;
+    width:100%;
+  }
+  #progress {
+    height:4px;
+    background: #111;
+  }
+  .flex {
+    display:flex;
+    justify-content: space-around;
+    align-items: stretch
+  }
+  .currency {
+    border:1px solid black;
+    padding: 10px 40px;
+  }
+  .bold {font-weight: bold;}
+</style>
+</body></html>
