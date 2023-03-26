@@ -5,47 +5,54 @@
 </head>
 <body>
   <div class="fix-wrapper">
-    <div id="progress"></div>
-    <div class="flex">
-      <div id="cur1" class="currency" onclick="setstep(1)">KRW</div>
-      <div id="cur2" class="currency" onclick="setstep(2)">THB</div>
-    </div>
-    <div class="flex">
-      <input id="krw" type="number" value="0" pattern="\d*" step="1000"/>
-      <input id="thb" type="number" value="0" pattern="\d*" step="100"/>
-    </div>
+    
+    
+    <input type="radio" id="s1" name="step" value="100" checked><label for="s1">100</label>
+    <input type="radio" id="s2" name="step" value="1000"><label for="s2">1000</label>
+    <input type="radio" id="s3" name="step" value="10000"><label for="s3">10000</label>
+    <input type="radio" id="c1" name="base_currency" value="KRW" checked><label class="currency" for="c1">KRW</label>
+    <input id="krw" type="number" min="0" value="0" step="1000" />
+    <input id="thb" type="number" min="0" value="0" step="100" />
+    <input type="radio" id="c2" name="base_currency" value="THB"><label class="currency" for="c2">THB</label>
   </div>
-  
   <div id="slider" style="height:10000px"></div>
-
 <script>
 const exchange = 0.026
-function up(){}
-function down(){
-}
-function setstep(i){
+var x = 0
+function setstep(e){
   cur1.classList.remove("bold")
   cur2.classList.remove("bold")
-  document.querySelector('cur'+i).classList.add("bold")
+  e.classList.add("bold")
 }
 function update(){
-  if(document.body.scrollTop > 5000){
-    up()
+  step = parseInt(document.querySelector('input[name="step"]:checked').value, 10)
+  if(document.body.scrollTop < 5000){
+    x += 1 
   }
+  if (document.body.scrollTop > 5000){
+    if(x>0) x -= 1
+  }
+  krw.value = x * step
+  thb.value = parseInt(x * step * exchange , 10)
+  if(krw.value < 0) krw.value = 0
   window.scroll(0, 5000)
 }
+
 document.addEventListener("scroll", update)
-
 window.onload = _=>setTimeout(_=>window.scroll(0, 5000),100)
-
 </script>
 
 <style>
 
   * {
     box-sizing: border-box;
-    /**/outline: 1px dashed rgba(255,0,0,0.1);/**/
+    /*/outline: 1px dashed rgba(255,0,0,0.1);/**/
   }
+
+  *::-webkit-scrollbar {
+    width: 0px;
+  }
+
   html, body {
     background: black;
     margin: 0;
@@ -56,24 +63,36 @@ window.onload = _=>setTimeout(_=>window.scroll(0, 5000),100)
     position: fixed;
     top: 0;
     width:100%;
-  }
-  #progress {
-    height:4px;
-    background: #111;
-  }
-  .flex {
-    display:flex;
-    justify-content: space-around;
-    align-items: stretch
+    height:100%;
+    text-align: center;
   }
   .currency {
-    border:1px solid black;
-    padding: 10px 40px;
+    font-size: 2em;
+    display: block;
   }
   .bold {font-weight: bold;}
-  
+
   input[type=number] {
-    height:400px;
+    margin: 100px 0;
+    font-size: 2em;
+    background: 0;
+    border: 0;
+    color: white;
+    text-align: center;
+  }
+
+  table{
+    width:100%;
+    table-layout: fixed;
+  }
+  td {text-align: center;}
+
+  input[type="radio"] {
+    display: none;
+  }
+
+  input[type=radio]:checked+label {
+    font-weight:bolder;
   }
 </style>
 </body></html>
