@@ -26,7 +26,7 @@ function down(){
 function setstep(i){
   cur1.classList.remove("bold")
   cur2.classList.remove("bold")
-  e.classList.add("bold")
+  document.querySelector('cur'+i).classList.add("bold")
 }
 function update(){
   if(document.body.scrollTop > 5000){
@@ -71,5 +71,9 @@ window.onload = _=>setTimeout(_=>window.scroll(0, 5000),100)
     padding: 10px 40px;
   }
   .bold {font-weight: bold;}
+  
+  input[type=number] {
+    height:400px;
+  }
 </style>
 </body></html>
